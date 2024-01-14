@@ -1,0 +1,91 @@
+
+<app-menu class="menu"></app-menu> 
+<h1 class="titrepage"><i class="fa-solid fa-folder-plus"></i> Demander un stage</h1>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Ajouter une demande de votre choix</h2>
+                    <form [formGroup]="ajouterDemande">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Date début du stage <span class="etoile">*</span></label>
+                                    <input id="date" class="input--style-4" type="date" formControlName="dateDeb">
+                                    <div *ngIf="(dateDeb.invalid && dateDeb.touched) || dateDeb.dirty">
+                                        <small *ngIf="dateDeb.errors?.['required']" class="text-danger">Le date début est obligatoire</small>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Date fin du stage <span class="etoile">*</span></label>
+                                    <input id="date" class="input--style-4" type="date" formControlName="dateFin">
+                                    <div *ngIf="(dateFin.invalid && dateFin.touched) || dateFin.dirty">
+                                        <small *ngIf="dateFin.errors?.['required']" class="text-danger">Le date fin est obligatoire</small>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <label class="label">Etablissement <span class="etoile">*</span></label>
+                                    <input class="input--style-4" type="text" formControlName="etablissement" placeholder="Votre établissement" >
+                                    <div *ngIf="(etablissement.invalid && etablissement.touched) || etablissement.dirty">
+                                        <small *ngIf="etablissement.errors?.['required']" class="text-danger">L'établissement est obligatoire</small>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                          <div class="col-2" id="cv">
+                            <label for="formFileDisabled" id="demande" class="form-label">Demande numérisée de votre établissement (JPEG / PNG) <span class="etoile">*</span></label>
+                            <input class="form-control" name="demandefac" type="file" accept="image/*" formControlName="demandefac" (change)="fileEvent($event)" >
+                            <div *ngIf="(demandefac.invalid && demandefac.touched) || demandefac.dirty">
+                                <small *ngIf="demandefac.errors?.['required']" class="text-danger">La demande est obligatoire</small>
+                            </div> 
+                          </div>
+
+                          <div class="col-2" id="cv1">
+                            <label for="formFileDisabled" class="form-label">CV <span class="etoile">*</span></label>
+                            <input class="form-control" name="cv" type="file" accept="image/*" formControlName="cv" (change)="fileEvent1($event)">
+                            <div *ngIf="(cv.invalid && cv.touched) || cv.dirty">
+                                <small *ngIf="cv.errors?.['required']" class="text-danger">Le CV est obligatoire</small>
+                            </div>
+                          </div>
+                      </div>
+                      <br>
+                        <div class="input-group">
+                          <label class="label">Niveau d'études <span class="etoile">*</span></label>
+                          <input class="input--style-4" type="text" formControlName="niveauEtude" placeholder="exp : 2ème année technologies informatiques" >
+                          <div *ngIf="(niveauEtude.invalid && niveauEtude.touched) || niveauEtude.dirty">
+                            <small *ngIf="niveauEtude.errors?.['required']" class="text-danger">Votre niveau d'études est obligatoire</small>
+                          </div>
+                        </div>
+
+                        <div class="row row-space">
+                          <label class="label">Type de stage : * </label>
+                          <select name="subject" formControlName="typ" class="input--style-4">
+                            <option name="r1" *ngFor="let cati of types" [value]="cati.id">{{cati.nom}}</option>
+                        </select>
+                        <div *ngIf="(typ.invalid && typ.touched) || typ.dirty">
+                            <small *ngIf="typ.errors?.['required']" class="text-danger">Veuillez entrer le type de stage</small>
+                        </div>
+
+                      </div>
+                        <div class="boutons">
+                            <button class="btn1" [disabled]="ajouterDemande.invalid" type="submit" (click)="onSubmit()"><i class="fa-solid fa-plus"></i>  Ajouter</button>
+                            <button class="btn2" type="reset"><i class="fa-solid fa-delete-left"></i>  Annuler</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="result1"></div>
+                <div id="result"></div>
+            </div>
+        </div>
+    </div>
+
+    

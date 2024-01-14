@@ -1,0 +1,168 @@
+<app-menu-admin class="menu"></app-menu-admin>
+<h1 class="titrepage"><i class="fa-solid fa-users-between-lines"></i>Détails du stage {{currentStage.id}} </h1>
+
+<!DOCTYPE html>
+<html lang="en"> 
+<body>
+<div class="wrapper">
+    <div class="profile">
+        <div class="profile_img_info">         
+             <div class="img">
+                <img class="img" src="https://img.etimg.com/thumb/width-1200,height-900,imgsize-81929,resizemode-1,msid-68352275/wealth/tax/how-to-find-income-tax-assessing-officer-or-ao-details.jpg" alt="profile_pic">     
+             </div>
+             <div class="info">
+                  <p class="name">Sujet : {{currentStage.sujet}}</p>
+                  <p class="place">
+                    Type : 
+                      <span *ngFor="let c of types">
+                        <span *ngIf="c.id==currentStage.typ" class="categorie">{{c.nom}}</span>
+                      </span> 
+                  </p>
+                  <p class="place">Département : {{currentStage.departement}}</p>
+             </div>
+        </div>
+        <div class="profile_skills">
+            <div class="skills">
+                <p>Plus d'informations</p>
+                <ul>
+                    <span class="title"><i class="fa-solid fa-calendar-days"></i> De : {{currentStage.dateDeb}} à {{currentStage.dateFin}}</span><br>
+                    <span class="title"><i class="fa-solid fa-user-group"></i>  Nombre de places total : {{currentStage.nbPlaces}}</span> <br>
+                      <span class="title">
+                        <i class="fa-solid fa-question"></i>
+                        Nombre de places restants : {{currentStage.nbPlaces - tabAjoutsFiltre.length}}
+                        <span> </span><br>
+                      </span> 
+                </ul>
+            </div>
+            <p id="details">Détails de paiement</p>
+            <div class="tags_wrap">
+                <span class="tag" *ngIf="currentStage.siPaye=='1'">Stage payé</span>
+                <span *ngIf="currentStage.siPaye=='0'" [ngClass]="currentStage.siPaye=='0'?'c1':'c2' ">Stage non payé</span>
+                <span class="tag" id="mntc" *ngIf="currentStage.siPaye>'0'">Montant : {{currentStage.montant}} DT</span>
+            </div>
+        </div>
+    </div>
+    <div class="profile_counts">
+        <div class="profile_counts_wrap"> 
+           <span class="item" type="button">
+             <span class="title" type="button" value="Modifier" (click)="EditStage(currentStage)" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-pen-to-square"></i>Modifier</span>
+           </span>
+        </div>
+        <div class="profile_counts_wrap">
+           <div class="item">
+           <div class="title" (click)="onOpenModal(stage, 'delete')"><i class="fa-solid fa-trash-can"></i>  Supprimer</div>
+          </div>
+        </div>
+        <div class="profile_counts_wrap">
+           <div class="item">
+           <div class="title" [routerLink]="['/listeStagesAdmin']"><i class="fa-solid fa-arrow-left"></i> Retour</div>
+          </div>
+        </div>
+    </div>
+</div>	
+
+</body>
+</html>
+
+<div class="container" id="main-container">
+    <div *ngIf="connecte">
+
+ <!-- Delete Modal -->
+<div class="modal fade" id="deleteStageModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Confimation de suppression du Stage</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>êtes-vous sûr de vouloir supprimer le stage {{currentStage?.id}} ?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+              <button class="btn btn-danger" data-dismiss="modal" (click)="supprimer()">Oui</button>
+           </div>
+        </div> 
+     </div>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel">Modifier stage</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
+
+<div class="modal-body">
+<form class="row g-3" [formGroup]="formValue">
+    <div class="col-md-6">
+        <label for="nom" class="form-label">Sujet</label>
+        <input type="text" formControlName="sujet" class="form-control" id="nom"> 
+        <div *ngIf="(sujet.invalid && sujet.touched) || sujet.dirty">
+          <small *ngIf="sujet.errors?.['required']" class="text-danger">Le sujet du stage est obligatoire</small>
+        </div> 
+    </div>
+
+    <div class="col-md-6">
+        <label for="departement" class="form-label">Département</label>
+        <input type="text" formControlName="departement" class="form-control" id="nom"> 
+        <div *ngIf="(departement.invalid && departement.touched) || departement.dirty">
+          <small *ngIf="departement.errors?.['required']" class="text-danger">Le département est obligatoire</small>
+        </div> 
+    </div>
+
+    <div class="col-md-6">
+        <label for="dateDeb" class="form-label">Date début</label>
+        <input type="date" formControlName="dateDeb" class="form-control" id="nom"> 
+        <div *ngIf="(dateDeb.invalid && dateDeb.touched) || dateDeb.dirty">
+          <small *ngIf="dateDeb.errors?.['required']" class="text-danger">Veuillez indiquer la date début du stage</small>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label for="dateFin" class="form-label">Date fin</label>
+        <input type="date" formControlName="dateFin" class="form-control" id="nom"> 
+        <div *ngIf="(dateFin.invalid && dateFin.touched) || dateFin.dirty">
+          <small *ngIf="dateFin.errors?.['required']" class="text-danger">Veuillez indiquer la date fin du stage</small>
+        </div>
+    </div> 
+
+    
+      <div class="col-md-6">
+        <input type="radio" formControlName="siPaye" name="siPaye" class="form-check-label" value="1" 
+        [(ngModel)]="isVisible" 
+        [checked]="currentStage.siPaye=='1'" />Stage payé
+      </div>
+
+      <div class="col-md-6">
+        <input type="radio" name="siPaye" class="form-check-label" value="0"
+        formControlName="siPaye" [(ngModel)]="isVisible" 
+        [checked]="currentStage.siPaye=='0'" />Stage non payé
+      </div>
+
+        <div class="col-md-6" *ngIf="isVisible == 1">
+          <label for="montant">Montant de paiement</label>
+          <input type="number" formControlName="montant" name="montant" class="form-control" />
+        </div>
+        <div *ngIf="isVisible == 0"></div> 
+
+    <div class="col-md-6">
+      <label for="tit">Nombre de places</label>
+      <input type="number" formControlName="nbPlaces" class="form-control w-50" id="tit" aria-describedby="emailHelp" >
+    </div>
+</form>
+</div>
+
+<div class="modal-footer"> 
+<button type="button" class="btn btn-warning"  data-bs-dismiss="modal">Fermer</button>
+<button *ngIf="btnUpdateShow" [disabled]="formValue.invalid" type="button" class="btn btn-primary" (click)="UpdateStage()"  >Enregistrer</button>
+</div>
+</div>
+</div>
+</div>

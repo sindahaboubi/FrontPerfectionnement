@@ -1,0 +1,41 @@
+<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+          <img [src]="imgstr" class="img logo rounded-circle mb-5">
+          <div class="type"><i class="fa-solid fa-user-gear"></i> Admin</div>
+	        <ul class="list-unstyled components mb-5">
+	          <li>
+	            <a  [routerLink]="['/admin',admin.id]" data-toggle="collapse" aria-expanded="false">
+                    <i class="fa-solid fa-address-card" routerLinkActive="actif"></i>  Profil
+                    <i id="fleche" class="fa-solid fa-angle-right"></i>
+              </a> 
+	          </li>
+	          <li>
+              <a routerLink="/listeTousStagiaires" data-toggle="collapse" aria-expanded="false">
+                <i class="fa-solid fa-users-gear" routerLinkActive="actif"></i>  Stagiaires
+                <i id="flechestagiaire" class="fa-solid fa-angle-right"></i>
+              </a>
+	          </li>
+            <li>
+              <a routerLink="/listeStagesAdmin" >
+                <i class="fa-solid fa-file-pen" routerLinkActive="actif"></i>  Stages
+                <i id="flechestages" class="fa-solid fa-angle-right"></i>
+              </a>
+	        </li>
+            <li>
+	          <a  routerLink="/listeEncadrants" data-toggle="collapse" aria-expanded="false">
+                <i class="fa-solid fa-users-between-lines" routerLinkActive="actif"></i>    Encadrants
+                <i id="flecheenc" class="fa-solid fa-angle-right"></i>
+              </a>  
+	        </li>
+	        </ul>
+	      </div>
+    	</nav>
+      <div id="content" class="p-4 p-md-5">
+      </div>
+		</div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>

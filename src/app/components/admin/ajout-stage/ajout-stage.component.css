@@ -1,0 +1,30 @@
+.form-control , .form-select{
+    background-color: rgba(112, 129, 119, 0.205); 
+}
+
+
+.etoile{
+    color:red;
+}
+
+.btn1{
+    background-color: rgb(235, 197, 32);
+    color:black;
+    padding:8px;
+    width:100px;
+    border-radius: 8px;
+    border:0px solid transparent;
+    position: relative;
+    left:134px;
+}
+
+.btn2{
+    background-color: rgb(117, 117, 112);
+    color:white;
+    padding:8px;
+    width:100px;
+    border-radius: 8px;
+    border:0px solid transparent;
+    position: relative;
+    left:150px;
+}

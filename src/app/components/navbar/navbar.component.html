@@ -1,0 +1,68 @@
+<script type="text/javascript" src="assets/js/mdb.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<body>
+  <header>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/accueil">
+        <img id="logo" src="assets/logo.png">
+      </a>
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/accueil" routerLinkActive="actif">Accueil</a>
+          </li>
+          <li class="nav-item" *ngIf="encadrant==null">
+            <a class="nav-link" href="#!" routerLinkActive="actif">A propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onOpenModal('inscrire')" *ngIf="!connecte">S'inscrire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="openDialog()" *ngIf="!connecte">Se connecter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="connecte" (click)="logout()" >Déconnexion</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav profil">
+          <li class="nav-item">
+            <div *ngIf="stagiaire!=null"> <a class="nav-link" routerLinkActive="actif" [routerLink]="['/stagiaire',stagiaire.id]">
+              <img [src]="imgstr" id="photoStg" width="150">  {{stagiaire.nom}} {{stagiaire.prenom}}</a>
+            </div>
+
+            <div *ngIf="encadrant!=null"><a class="nav-link" [routerLink]="['/encadrant',encadrant.id]">
+              <i class="fa-solid fa-user-tie"></i>   {{encadrant.nom}} {{encadrant.prenom}}</a>
+            </div>
+          </li>
+        </ul>
+        <ul class="navbar-nav d-flex flex-row fa">
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" id="facebook" href="https://www.facebook.com/CNITUNISIA">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" id="twitter" href="https://twitter.com/cnitunisia?lang=fr">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" id="gmail" href="mailto:webcni@cni.tn">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+</body>
+
+

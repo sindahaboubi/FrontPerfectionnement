@@ -1,0 +1,68 @@
+.navbar-brand {
+  font-size: 1.10rem;
+  letter-spacing: 13px;
+} 
+
+.navbar{
+    background-color: rgb(218, 218, 218);
+} 
+
+#photoStg{
+    width: 35px; 
+    height:35px;
+    border-radius: 50%;
+}
+
+#facebook:hover{
+    color:blue;
+}
+
+#gmail:hover{
+    color:rgb(240, 44, 44);
+}
+
+#twitter:hover{
+    color:rgb(25, 235, 250);
+}
+
+#logo{
+    width: 100px;
+    height: 90px;  
+    position:relative;
+    left:-90px;
+    top:-1px; 
+}  
+
+.actif{
+    color:rgba(0, 0, 0, 0.623);
+    font-weight:bold; 
+}
+
+header{
+    font-size:18px;
+    color:blue;
+}
+
+#navbarSupportedContent{
+    position:relative;
+    right:-20px;
+}
+
+.profil{
+    position:relative;
+    right: -10px;
+}
+
+.fa{
+    position:relative;
+    right:-50px;
+}
+
+.me-auto{
+    position:relative;
+    right:10px;
+}
+
+nav{
+    height:90px;
+}

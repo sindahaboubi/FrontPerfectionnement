@@ -1,0 +1,60 @@
+    <form class="row g-3" [formGroup]="ajouterStage" >
+        <div class="col-md-6">
+          <label for="tit">Sujet</label>
+          <input type="text" formControlName="sujet" class="form-control" id="tit" aria-describedby="emailHelp" >
+        </div>
+
+        <div class="col-md-6">
+          <label >Type <span class="etoile">*</span> </label>
+          <select class="form-select" aria-label="Default select example" formControlName="typ">
+              <i class="fa-solid fa-users"></i>
+              <option *ngFor="let type of types" [value]="type.id">{{type.nom}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="tit">Date début</label>
+          <input type="date" formControlName="dateDeb" class="form-control" id="tit" aria-describedby="emailHelp" >
+        </div>
+
+        <div class="col-md-6">
+          <label for="tit">Date fin</label>
+          <input type="date" formControlName="dateFin" class="form-control" id="tit" aria-describedby="emailHelp" >
+        </div>
+
+        <div class="col-md-6">
+          <input type="radio" formControlName="siPaye" name="siPaye" value="1" 
+          [checked]="isSelected" [value]="1" [(ngModel)]="isVisible" />Stage payé
+        </div>
+
+        <div class="col-md-6">
+          <input type="radio" name="siPaye" value="0"
+          [checked]="!isSelected" formControlName="siPaye" [value]="0" [(ngModel)]="isVisible" />Stage non payé  
+        </div>
+
+          <div class="col-md-6" *ngIf="isVisible == 1">
+            <label for="montant">Montant de paiement</label>
+            <input type="number" formControlName="montant" name="montant" class="form-control" />
+          </div>
+
+
+          <br>
+        <div class="col-md-6">
+          <label for="tit">Département</label>
+          <input type="text" formControlName="departement" class="form-control" id="tit" aria-describedby="emailHelp" >
+        </div>
+
+        
+        <div class="col-md-6">
+            <label for="tit">Nombre de Places</label>
+            <input type="number" formControlName="nbPlaces" class="form-control" id="tit" aria-describedby="emailHelp" >
+        </div>
+
+
+        <br>
+        <div class="card-footer">
+        <button type="submit" class="btn1" (click)="onSubmit()"><i class="fa-solid fa-plus"></i>  Ajouter</button>
+        <button type="button" class="btn2" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close"><i class="fa-sharp fa-solid fa-circle-xmark"></i>  Annuler</button>
+        </div>
+    </form>
+

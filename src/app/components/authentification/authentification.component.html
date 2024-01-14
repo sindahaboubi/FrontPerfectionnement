@@ -1,0 +1,50 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+        <div class="wrap d-md-flex">
+          <div class="img" style="background-image: url(assets/connexion.jpg);">
+          </div>
+          <div class="login-wrap p-4 p-md-5">
+            <div class="d-flex">
+              <div class="w-100">
+                <h3 class="mb-4">Connexion</h3>
+                <span class="w-100qu">Vous n'avez pas de compte ? </span><br>
+                <a href="" class="w-100-connex" style="text-decoration: underline;">S'inscrire ici</a>
+              </div>
+            </div>
+
+            <form class="signin-form"  [formGroup]="formAuthentication" (ngSubmit)="onSubmit();">
+              <div class="form-group mb-3">
+                <label class="label" for="photo">Nom d'utilisateur</label>
+                <input type="text" formControlName="login" placeholder="Nom d'utilisateur" class="form-control" placeholder="Nom d'utilisateur">
+                <div *ngIf="(login.invalid && login.touched) || login.dirty">
+                  <small *ngIf="login.errors?.['required']" class="text-danger">Le nom d'utilisateur est obligatoire</small>
+                </div>
+              </div>
+
+              <div class="form-group mb-3">
+                <label class="label" for="photo">Mot de passe</label>
+                <input type="password" class="form-control" formControlName="pwd" placeholder="Mot de passe">
+                <div *ngIf="(pwd.invalid && pwd.touched) || pwd.dirty">
+                  <small *ngIf="pwd.errors?.['required']" class="text-danger">Veuillez saisir votre mot de passe</small>
+                </div> 
+              </div>
+
+              <div class="boutons">
+                <button type="submit" class="btn btn-info btn1" [disabled]="formAuthentication.invalid" style="position:relative;right:0px;top:-6px;width:130px">Se connecter</button>
+                <button type="button" class="btn btn-danger" style="position:relative;right:-20px;top:-7px;width:100px" >Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>  
+ 

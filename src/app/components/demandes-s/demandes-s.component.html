@@ -1,0 +1,49 @@
+<app-menu class="menu"></app-menu>
+<h1 class="titrepage"><i class="fa-solid fa-id-badge"></i> Mes demandes de stage ({{tabDemandeFiltre.length}}) </h1>
+
+<div class="wrap">
+  <div class="search">
+     <input type="text" [(ngModel)]="val" class="searchTerm" placeholder="Rechercher içi...">
+     <button type="submit" class="searchButton">
+       <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>
+
+<body class="hm-gradient">
+  <main>
+      <div class="container mt-4">
+          <div class="card mb-4">
+              <div class="card-body">
+                  <table class="table table-striped">
+                      <thead>
+                          <tr>
+                              <th>ID</th>
+                              <th>Date demande</th>
+                              <th>Date début du stage</th>
+                              <th>Date fin du stage</th>
+                              <th>Etat</th>
+                              <th>Voir</th> 
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let dem of tabDemandeFiltre | filter:val;index as i" (click)="openDialog(i)"class="ligne"  >
+                              <th>{{dem.id}}</th>
+                              <td>{{dem.dateCrea}}</td>
+                              <td>{{dem.dateDeb}}</td>
+                              <td>{{dem.dateFin}}</td>
+                              <td>
+                                <span *ngFor="let a of ajoutss"  [ngClass]="a.idDemande==dem.id?'c1':'c2' ">
+                                  <span *ngIf="a.idDemande==dem.id" class="categorie">Acceptée</span>
+                                </span>
+                              </td>
+                              <td><i id="eye" class="fa-solid fa-eye"></i></td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </main>
+</body>
+

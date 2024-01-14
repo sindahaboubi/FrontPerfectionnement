@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head> 
+  <body> 
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+          <img src="https://carrieres.open.global/sites/open-rh/files/vecteur-icone-homme-affaires_52756-255.jpg" class="img logo rounded-circle mb-5">
+          <div class="type">Encadrant</div>
+	        <ul class="list-unstyled components mb-5">
+	          <li>
+	            <a  [routerLink]="['/encadrant',encadrant.id]" data-toggle="collapse" aria-expanded="false">
+                    <i class="fa-solid fa-address-card" routerLinkActive="actif"></i>    Profil
+                    <i id="fleche" class="fa-solid fa-angle-right"></i>
+              </a>
+	          </li>
+	          <li>
+              <a routerLink="/mesStagesEnc" data-toggle="collapse" aria-expanded="false">
+                <i class="fa-solid fa-folder-plus" routerLinkActive="actif"></i>  Mes stagiaires
+                <i id="flechestagiaire" class="fa-solid fa-angle-right"></i>
+              </a>
+	          </li>
+	        </ul>
+	      </div>
+    	</nav>
+
+      <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+      </div>
+		</div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

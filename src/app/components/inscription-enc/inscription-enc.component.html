@@ -1,0 +1,93 @@
+<form class="row g-3" [formGroup]="formInscri" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                <div class="col-md-6">
+                  <label for="nom">Nom <span class="etoile">*</span></label>
+                  <input type="text" formControlName="nom" name="nom" class="form-control" id="nom" placeholder="Nom de l'encadrant" >
+                  <div *ngIf="(nom.invalid && nom.touched) || nom.dirty">
+                    <small *ngIf="nom.errors?.['required']" class="text-danger">Le nom est obligatoire</small>
+                  </div>  
+                </div>
+  
+                <div class="col-md-6">
+                  <label for="nom">Prénom <span class="etoile">*</span></label>
+                  <input type="text" class="form-control" formControlName="prenom" placeholder="Prénom de l'encadrant">
+                  <div *ngIf="(prenom.invalid && prenom.touched) || prenom.dirty">
+                    <small *ngIf="prenom.errors?.['required']" class="text-danger">Le prénom est obligatoire</small>
+                  </div>  
+                </div>
+
+                <div class="col-md-12">
+                    <label for="E-mail">E-mail <span class="etoile">*</span></label>
+                    <input type="email" class="form-control" placeholder="exp@gmail.com" formControlName="email" >
+                </div>
+
+                <div class="col-md-3">
+                    <label for="tele">tel <span class="etoile">*</span></label>
+                    <input type="text" class="form-control" formControlName="tel" placeholder="8 chiffres">
+                    <div *ngIf="(tel.invalid && tel.touched) || tel.dirty">
+                        <small *ngIf="tel.errors?.['required']" class="text-danger">Le numéro de téléphone est obligatoire</small>
+                        <small *ngIf="tel.errors?.['pattern']" class="text-danger">Veuillez entrer un numéro de téléphone valide</small>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="cin">CIN <span class="etoile">*</span></label>
+                    <input type="text" class="form-control" formControlName="cin" placeholder="8 chiffres">
+                    <div *ngIf="(cin.invalid && cin.touched) || cin.dirty">
+                        <small *ngIf="cin.errors?.['required']" class="text-danger">Le numéro CIN est obligatoire</small>
+                        <small *ngIf="cin.errors?.['pattern']" class="text-danger">Veuillez entrer un numéro CIN valide</small>
+                    </div>  
+                </div>
+
+                <div class="col-md-6">
+                    <label for="adr">Adresse</label>
+                    <input type="text" class="form-control" formControlName="adresse">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="datenaiss">Date de naissance <span class="etoile">*</span></label>
+                    <input type="date" class="form-control" formControlName="dateNaiss">
+                    <div *ngIf="(dateNaiss.invalid && dateNaiss.touched) || dateNaiss.dirty">
+                        <small *ngIf="dateNaiss.errors?.['required']" class="text-danger">La date de naissance est obligatoire</small>
+                    </div>  
+                </div>
+
+                <div class="col-md-6">
+                    <label>Spécialité <span class="etoile">*</span></label>
+                    <input type="text" class="form-control" formControlName="specialite" placeholder="Spécialite de l'encadrant">
+                    <div *ngIf="(specialite.invalid && specialite.touched) || specialite.dirty">
+                        <small *ngIf="specialite.errors?.['required']" class="text-danger">La spécialité est obligatoire</small>
+                    </div>  
+                </div>
+
+                <div class="col-md-6">
+                    <label >Direction <span class="etoile">*</span> </label>
+                    <select class="form-select" aria-label="Default select example" formControlName="dir">
+                    <option *ngFor="let type of directions" [value]="type.id">{{type.libelle}}</option>
+                    </select>
+                    <div *ngIf="(dir.invalid && dir.touched) || dir.dirty">
+                        <small *ngIf="dir.errors?.['required']" class="text-danger">Veuillez indiquer une direction</small>
+                    </div> 
+                </div>
+
+                <div class="col-md-6">
+                    <label></label><br>
+                    <input type="radio" value="h" formControlName="genre">Homme
+                    <input type="radio" value="f" formControlName="genre">Femme
+                  </div>
+
+                <div class="col-md-6">
+                    <label for="user">Nom d'utilisateur <span class="etoile">*</span></label>
+                    <input type="text" class="form-control" formControlName="username" >
+                </div>
+
+                <div class="col-md-6">
+                    <label>Mot de passe <span class="etoile">*</span></label>
+                    <input class="form-control" type="password" formControlName="mdp" >
+                </div>
+  
+                <div class="boutons">
+                  <button type="submit" [disabled]="formInscri.invalid" class="btn1" >Ajouter <i class="fa-solid fa-check"></i></button>
+                  <button type="button" data-bs-dismiss="modal" class="btn2">Annuler <i class="fa-sharp fa-solid fa-xmark"></i></button>
+                </div>
+                <div id="result"></div>
+              </form>

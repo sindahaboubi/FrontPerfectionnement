@@ -1,0 +1,134 @@
+<app-menu-admin class="menu"></app-menu-admin>
+<h1 class="titrepage"><i class="fa-solid fa-pen-to-square"></i> Toutes les demandes ({{demandes.length}}) </h1>
+
+<!DOCTYPE html>
+<html lang="en"> 
+<body>
+<button class="btnRetour" [routerLink]="['/listeTousStagiaires']"><i class="fa-solid fa-arrow-left"></i>  Retour</button>
+
+<div class="hm-gradient">
+    <main>
+        <div class="container mt-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead> 
+                            <tr class="tete">
+                                <th>ID</th>
+                                <th>Demande</th>
+                                <th>CV</th>
+                                <th>Etablissement</th>
+                                <th>Faite le</th>
+                                <th>Date début</th>
+                                <th>Date fin</th>
+                                <th>Niveau d'études</th>
+                                <th>Type</th>
+                                <th>Donner encadrant et stage</th>
+                                <th>Etat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let c of demandes;index as i" >
+                                <td class="ligne">{{c.id}}</td>
+                                <td class="ligne">
+                                    <a target="_blank" [href]="c.demandefac"><img class="imag" [src]="c.demandefac" alt="demandefac"> </a>
+                                </td>
+                                <td class="ligne">
+                                    <a target="_blank" [href]="c.cv"><img class="imag" [src]="c.cv" alt="cv"></a>
+                                </td>
+                                <td class="ligne">
+                                    {{c.etablissement}}
+                                </td>
+                                <td class="ligne">
+                                    {{c.dateCrea |date:"dd-MM-yyyy"}}
+                                </td>
+                                <td class="ligne">
+                                    {{c.dateDeb |date:"dd-MM-yyyy"}}
+                                </td>
+                                <td class="ligne">
+                                    {{c.dateFin |date:"dd-MM-yyyy"}}
+                                </td>
+                                <td class="ligne">
+                                    {{c.niveauEtude}}
+                                </td>
+                                <td class="ligne">
+                                    <span *ngFor="let t of types">
+                                        <span *ngIf="t.id==c.typ" class="categorie">{{t.nom}}</span>
+                                    </span> 
+                                </td>
+                                <td class="ligne">
+                                    <i type="button" id="btna" (click)="onOpenModal(c, 'add')" class="fa-solid fa-circle-plus" data-bs-toggle="modal" data-bs-target="#exampleModal" data-original-title="Edit"></i>
+                                </td>
+                                <td class="ligne">
+                                    <span *ngFor="let a of ajoutss"  [ngClass]="a.idDemande==c.id?'c1':'c2' ">
+                                        <span *ngIf="a.idDemande==c.id" class="categorie">Acceptée <i class="fa-solid fa-check"></i></span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+</body>
+</html>
+
+    <div class="container" id="main-container">
+        <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="updateEmployeeLabel">Affecter stage et encadrant pour la demande {{currentDemande?.id}}</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+    
+                  <div class="modal-body">
+                    <form class="card-body" [formGroup]="affecterStage" >
+    
+                            <div>
+                                <label >Stage <span class="etoile">*</span> </label>
+                                <select required class="form-select" aria-label="Default select example" formControlName="idStage">
+                                    <i class="fa-solid fa-users"></i>
+                                    <option *ngFor="let stage of stages" [value]="stage.id">{{stage.sujet}}</option>
+                                </select>
+                            </div>  
+                            <br>
+
+                            <div>
+                                <label >Encadrant <span class="etoile">*</span> </label>
+                                <select required class="form-select" aria-label="Default select example" formControlName="idEncadrant">
+                                <i class="fa-solid fa-users"></i>
+                                <option *ngFor="let encadrant of encadrants"  [value]="encadrant.id">
+                                    <span *ngIf="encadrant.genre=='h'">Mr</span>
+                                    <span *ngIf="encadrant.genre=='f'"> Mme </span> 
+                                    {{encadrant.nom}} {{encadrant.prenom}}
+                                    <span> 
+                                        <span *ngFor="let c of directions">
+                                            <span  *ngIf="c.id==encadrant.dir"> / {{c.libelle}}</span> 
+                                        </span>
+                                    </span>  / {{encadrant.specialite}} 
+                                </option>
+                                </select>
+                            </div>  
+    
+
+    
+                        <div class="modal-footer"> 
+                            <button type="submit" data-dismiss="modal" class="btn btn-primary" (click)="onSubmit()" [disabled]="affecterStage.invalid" >Ajouter</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">Fermer</button>
+                        </div>
+                    </form>
+                </div>
+               </div>
+            </div>
+          </div>
+    </div>
+
+
+
+
+

@@ -1,0 +1,119 @@
+<section class="ftco-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+        <div class="wrap d-md-flex">
+          <div class="img" style="background-image: url(assets/inscription.jpg);">
+          </div>
+          <div class="login-wrap p-4 p-md-5">
+            <div class="d-flex">
+              <div class="w-100">
+                <h3 class="mb-4">Inscription</h3>
+                <span class="w-100qu">Vous avez un compte ? </span><br>
+                <a href="" class="w-100-connex" style="text-decoration: underline;">Se connecter ici</a>
+              </div>
+            </div>
+
+            <form class="signin-form" [formGroup]="formInscri" (ngSubmit)="onSubmit()" enctype="multipart/form-data" >
+
+
+              <div id="nom" class="form-group mb-3">
+                <label for="nom">Nom <span class="etoile">*</span></label>
+                <input type="text" formControlName="nom" name="nom" class="form-control" id="nom">
+                <div *ngIf="(nom.invalid && nom.touched) || nom.dirty">
+                  <small *ngIf="nom.errors?.['required']" class="text-danger">Le nom est obligatoire</small>
+                </div>  
+              </div>
+
+              <div id="prenom" class="form-group mb-3">
+                <label for="prenom">Prénom <span class="etoile">*</span></label>
+                <input type="text" formControlName="prenom" class="form-control">
+                <div *ngIf="(prenom.invalid && prenom.touched) || prenom.dirty">
+                  <small *ngIf="prenom.errors?.['required']" class="text-danger">Le prénom est obligatoire</small>
+                </div>  
+              </div>
+
+              <div id="cin" class="form-group mb-3">
+                <label for="cin">CIN <span class="etoile">*</span></label>
+                <input type="text" formControlName="cin" class="form-control">
+                <div *ngIf="(cin.invalid && cin.touched) || cin.dirty">
+                  <small *ngIf="cin.errors?.['required']" class="text-danger">Le numéro CIN est obligatoire</small>
+                  <small *ngIf="cin.errors?.['pattern']" class="text-danger">Veuillez entrer un numéro CIN valide</small>
+              </div>  
+              </div>
+
+            <div id="adresse" class="form-group mb-3">
+                <label for="adr">Adresse  <span class="etoile">*</span></label>
+                <input type="text" formControlName="adresse" class="form-control">
+
+            </div>
+
+            <div id="dateNaiss" class="form-group mb-3">
+              <label for="datenaiss">Date de naissance <span class="etoile">*</span></label>
+              <input type="date" formControlName="dateNaiss" class="form-control">
+              <div *ngIf="(dateNaiss.invalid && dateNaiss.touched) || dateNaiss.dirty">
+                <small *ngIf="dateNaiss.errors?.['required']" class="text-danger">La date de naissance est obligatoire</small>
+              </div> 
+            </div>
+
+            <div class="form-group mb-3" id="username" >
+              <label for="username">Nom d'utilisateur <span class="etoile">*</span></label>
+              <input type="text" formControlName="username" class="form-control">
+              <div *ngIf="(username.invalid && username.touched) || username.dirty">
+                <small *ngIf="username.errors?.['required']" class="text-danger">Le nom d'utilisateur est obligatoire</small>
+              </div> 
+            </div>
+
+            <div class="form-group mb-3" id="mdp" >
+              <label class="label" for="mdp">Mot de passe</label>
+              <input type="password" class="form-control" formControlName="mdp">
+              <div *ngIf="(mdp.invalid && mdp.touched) || mdp.dirty">
+                <small *ngIf="mdp.errors?.['required']" class="text-danger">Le mot de passe est obligatoire</small>
+                <small *ngIf="mdp.errors?.['minlength']" class="text-danger">Votre mot de passe doit contenir au moins 6 caractères</small>
+              </div> 
+            </div>
+
+            <div class="form-group mb-3" id="tel">
+              <label for="tele">Téléphone <span class="etoile">*</span></label>
+              <input type="text" formControlName="tel" class="form-control">
+              <div *ngIf="(tel.invalid && tel.touched) || tel.dirty">
+                <small *ngIf="tel.errors?.['required']" class="text-danger">Le numéro de téléphone est obligatoire</small>
+                <small *ngIf="tel.errors?.['pattern']" class="text-danger">Veuillez entrer un numéro de téléphone valide</small>
+            </div>
+            </div>
+
+          <div class="form-group mb-3" id="photo">
+            <label class="label" for="photo">Photo de profil</label>
+            <input type="file" (change)="fileEvent($event)" name="image" formControlName="image" accept="image/*" class="form-control">
+          </div>
+
+          <div class="form-group mb-3" id="email" >
+            <label for="E-mail">E-mail <span class="etoile">*</span></label>
+            <input type="email" formControlName="email" class="form-control">
+            <div *ngIf="(email.invalid && email.touched) || email.dirty">
+              <small *ngIf="email.errors?.['required']" class="text-danger">L'adresse e-mail est obligatoire</small>
+              <small *ngIf="email.errors?.['pattern']" class="text-danger">Veuillez entrer une adresse e-mail valide</small>
+            </div> 
+          </div>
+
+            <div class="form-group mb-3" id="genre">
+              <label for="Genre">Genre <span class="etoile">*</span></label><br>
+              <span class="hf">
+                <input type="radio" value="h" formControlName="genre">Homme
+              </span>
+              <span class="hf">
+                <input type="radio" value="f" formControlName="genre" >Femme
+              </span>
+            </div>
+
+              <div class="boutons">
+                <button type="submit" [disabled]="formInscri.invalid" class="btn btn-info btn1" style="position:relative;right:0px;top:-6px;width:130px">S'inscrire</button>
+                <button type="button" class="btn btn-danger" style="position:relative;right:-20px;top:-7px;width:100px" >Annuler</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

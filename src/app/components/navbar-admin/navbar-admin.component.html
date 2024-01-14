@@ -1,0 +1,44 @@
+<script type="text/javascript" src="assets/js/mdb.min.js"></script>
+<script type="text/javascript" src="assets/js/script.js"></script>
+<body>
+  <header>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/accueil">
+        <img id="logo" src="assets/logo.png">
+      </a>
+      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/accueil" routerLinkActive="actif">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onOpenModal('inscrire')" *ngIf="!connecte">S'inscrire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="onOpenModal('connecte')" *ngIf="!connecte">Se connecter</a>
+          </li>
+          <li class="nav-item" id="deconnexion">
+            <a class="nav-link" *ngIf="connecte" (click)="logout()" routerLinkActive="actif" >Déconnexion <i id="iconedecon" class="fa-solid fa-right-from-bracket"></i></a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav profil">
+          <li class="nav-item">
+            <div *ngIf="admin!=null"> <a class="nav-link" routerLinkActive="actif" [routerLink]="['/admin',admin.id]">
+                <img [src]="imgstr" id="photoStg" width="150">  {{admin.nom}} {{admin.prenom}}</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+</body>
+
+

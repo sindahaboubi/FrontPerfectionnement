@@ -1,0 +1,102 @@
+<app-menu-admin class="menu"></app-menu-admin>
+<h1 class="titrepage"><i class="fa-solid fa-users-gear"></i> Tous les stagiaires ({{stagiaires.length}}) </h1>
+ 
+<div class="wrap">
+  <div class="search">
+     <input type="text" [(ngModel)]="val" class="searchTerm" placeholder="Rechercher">
+     <button type="submit" class="searchButton">
+       <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>
+
+<div class="hm-gradient">
+  <main>
+      <div class="container mt-4">
+          <div class="card mb-4">
+              <div class="card-body">
+                  <table class="table table-striped">
+                      <thead> 
+                          <tr>
+                              <th>ID</th>
+                              <th>Photo</th>
+                              <th>Nom et prénom</th>
+                              <th>E-mail</th>
+                              <th>Numéro de téléphone</th>
+                              <th>Demande(s)</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let stagiaire of stagiaires | filter:val" class="ligne" >
+                              <td>{{stagiaire.id}}</td>
+                              <td>
+                                <img class="imag" [src]="stagiaire.image" alt="photo"> 
+                              </td>
+                              <td>{{stagiaire.nom}}  {{stagiaire.prenom}}</td>
+                              <td>{{stagiaire.email}}</td>
+                              <td>{{stagiaire.tel}}</td>
+                              <td>
+                                <i id="demandes" *ngIf="stagiaire!=null" [routerLink]="['demandes-stagiaire',stagiaire.id]" class="fa-solid fa-align-justify"></i>
+                              </td>
+                              <td>
+                                <button class="btnSupp" (click)="onOpenModal(stagiaire, 'delete')" data-placement="top" data-original-title="Delete">
+                                  <i class="fa-solid fa-trash-can"></i>  Supprimer</button> <span class="btns"></span>
+                                <button class="btnDetails" [routerLink]="['/listeTousStagiaires',stagiaire.id]">
+                                  <i class="fa-solid fa-bookmark"></i>  Détails</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </main>
+  <div class="container" id="main-container">
+    <br>
+    
+     <!-- Delete Modal -->
+     <div class="modal fade" id="deleteEncadrantModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="deleteModelLabel">Confirmation de la suppression</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button> 
+            </div>
+            <div class="modal-body">
+               <p>Etes-vous sûr de vouloir supprimer le stagiaire {{deleteStagiaire?.id}} ?</p>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                  <button class="btn btn-danger" data-dismiss="modal">Oui</button>
+               </div> 
+            </div>
+         </div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+<div class="container" id="main-container"> 
+ <!-- Delete Modal -->
+ <div class="modal fade" id="deleteStagiaireModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Confirmation de la suppression</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Etes-vous sûr de vouloir supprimer le stagiaire {{deleteStagiaire?.nom}} ?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+              <button class="btn btn-danger" data-dismiss="modal" (click)="supprimer(deleteStagiaire.id)">Oui</button>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+</div> 

@@ -1,0 +1,105 @@
+<app-menu-admin class="menu"></app-menu-admin>
+<h1 class="titrepage"><i class="fa-solid fa-file-pen"></i> Tous les stages ({{tabStageFiltre.length}}) </h1>
+
+<div class="zonefiltre">
+  <div *ngIf="id_admin!=null">
+    <button (click)="onOpenModal('connecte')" class="btnajout"><i class="fa-solid fa-plus"></i>  
+      Ajouter un stage
+    </button>
+  </div>
+
+  
+<div class="page">
+    <nav class="filtrer">
+        <form [formGroup]="FormTri" (ngSubmit)="onSubmit()">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3">Type du stage</span><br>
+          </div>
+            <div *ngFor="let c of types">
+              <input type="radio" class="option-input radio" formControlName="type" [value]="c.id"><span margin="2%">{{c.nom}} </span>
+            </div>
+    
+            <br>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Date debut du stage</span>
+            </div>
+            <div class="input-group mb-3">
+              <input type="date" formControlName="dateDeb" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+    
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">Date fin du stage</span>
+            </div>
+            <div class="input-group mb-3">
+              <input type="date" formControlName="dateFin" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+    
+        <input type="checkbox" class="option-input" formControlName="choix" [value]="1">
+        <span>Supprimer mon choix </span><br>
+        <br>
+            <button type="submit" class="btnafficher" [disabled]="FormTri.invalid" >
+            Afficher
+            </button>
+        </form>
+      </nav>
+    </div>
+</div>
+
+
+      <div class="hm-gradient">
+        <main>
+            <div class="container mt-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead> 
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Sujet</th>
+                                    <th>Période</th>
+                                    <th>Type</th>
+                                    <th>Département</th>
+                                    <th>Détails</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr  class="ligne" *ngFor="let stag of tabStageFiltre;index as i" >
+                                    <td>{{stag.id}}</td>
+                                    <td>{{stag.sujet}}</td>
+                                    <td>De {{stag.dateDeb}} à {{stag.dateFin}} </td>
+                                    <td>
+                                      <span *ngFor="let c of types">
+                                        <span *ngIf="c.id==stag.typ" class="categorie">{{c.nom}}</span>
+                                      </span>
+                                    </td>
+                                    <td>{{stag.departement}}</td>
+                                    <td>
+                                      <i id="voir" [routerLink]="['/listeStagesAdmin',stag.id]" class="fa-sharp fa-solid fa-eye">
+                                      </i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+</div>
+
+<div class="container" id="main-container">
+<div class="modal fade" id="connecteModal" tabindex="-1" role="dialog" aria-labelledby="connecteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content connecte">
+      <div class="modal-header">
+          <h5 class="modal-title" id="connecteModalLabel">Ajouter un nouveau stage</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+          <app-ajout-stage class="form" ></app-ajout-stage>
+      </div>
+  </div>
+  </div>
+</div>
+</div>

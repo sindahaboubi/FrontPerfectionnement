@@ -1,0 +1,218 @@
+<div class="page">
+<app-menu></app-menu>
+
+<div class="container" style="position:relative; width:950px; top:-520px; right:-150px">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel">Modifier votre profil</h5>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
+
+<div class="modal-body">
+<form class="row g-3" [formGroup]="formValue">
+    <div class="col-md-6">
+        <label for="nom" class="form-label">Nom <span class="etoile">*</span></label>
+        <input type="text" formControlName="nom" class="form-control" id="nom" placeholder="Nom" >
+        <div *ngIf="(nom.invalid && nom.touched) || nom.dirty">
+          <small *ngIf="nom.errors?.['required']" class="text-danger">Le nom est obligatoire</small>
+        </div> 
+    </div>
+
+<div class="col-md-6">
+    <label for="prenom" class="form-label">Prenom <span class="etoile">*</span></label>
+    <input type="text" formControlName="prenom" class="form-control" id="prenom" placeholder="Prénom">
+    <div *ngIf="(prenom.invalid && prenom.touched) || prenom.dirty">
+      <small *ngIf="prenom.errors?.['required']" class="text-danger">Le prénom est obligatoire</small>
+    </div> 
+</div>
+
+<div class="col-md-6">
+    <label for="adresse" class="form-label">Adresse <span class="etoile">*</span></label>
+    <input type="text" formControlName="adresse" class="form-control" id="adresse" placeholder="Adresse">
+    <div *ngIf="(adresse.invalid && adresse.touched) || adresse.dirty">
+      <small *ngIf="adresse.errors?.['required']" class="text-danger">L'adresse est obligatoire</small>
+    </div> 
+</div>
+
+<div class="col-md-6">
+    <label for="tel" class="form-label">Numéro de téléphone <span class="etoile">*</span></label>
+    <input type="text" formControlName="tel" class="form-control" id="tel" placeholder="8 chiffres">
+    <div *ngIf="(tel.invalid && tel.touched) || tel.dirty">
+      <small *ngIf="tel.errors?.['required']" class="text-danger">Le numéro de téléphone est obligatoire</small>
+      <small *ngIf="tel.errors?.['pattern']" class="text-danger">Veuillez entrer un numéro de téléphone valide</small>
+    </div> 
+</div>
+
+<div class="col-md-6">
+    <label for="email" class="form-label">Genre <span class="etoile">*</span></label><br>
+    <input type="radio" formControlName="genre" class="form-check-label" id="genre" value="h" [checked]="currentStagiaire.genre=='h'">Homme<br>
+    <input type="radio" formControlName="genre" class="form-check-label" id="genre" value="f" [checked]="currentStagiaire.genre=='f'">Femme
+</div>
+
+<div class="col-md-6">
+    <label for="mdp" class="form-label">Mot de passe <span class="etoile">*</span></label>
+    <input type="password" formControlName="mdp" class="form-control" id="mdp" placeholder="Au moins 6 caractères">
+    <div *ngIf="(mdp.invalid && mdp.touched) || mdp.dirty">
+      <small *ngIf="mdp.errors?.['required']" class="text-danger">Le mot de passe est obligatoire</small>
+      <small *ngIf="mdp.errors?.['minlength']" class="text-danger">Votre mot de passe doit contenir au moins 6 caractères</small>
+    </div> 
+
+</div>
+
+<div class="col-md-6">
+    <label for="cin" class="form-label">CIN <span class="etoile">*</span></label>
+    <input type="text" formControlName="cin" class="form-control" id="cin" placeholder="8 chiffres">
+    <div *ngIf="(cin.invalid && tel.touched) || cin.dirty">
+      <small *ngIf="cin.errors?.['required']" class="text-danger">Le numéro CIN est obligatoire</small>
+      <small *ngIf="cin.errors?.['pattern']" class="text-danger">Veuillez entrer un numéro CIN valide</small>
+    </div> 
+</div>
+
+<div class="col-md-6">
+    <label for="username" class="form-label">Nom d'utilisateur <span class="etoile">*</span></label>
+    <input type="text" formControlName="username" class="form-control" id="username" placeholder="Nom d'utilisateur">
+    <div *ngIf="(username.invalid && username.touched) || username.dirty">
+      <small *ngIf="username.errors?.['required']" class="text-danger">Le nom d'utilisateur est obligatoire</small>
+    </div> 
+</div>
+
+<div class="col-md-6">
+    <label for="email" class="form-label">E-mail <span class="etoile">*</span></label>
+    <input type="email" formControlName="email" class="form-control" id="email" placeholder="exemple@gmail.com">
+    <div *ngIf="(email.invalid && email.touched) || email.dirty">
+      <small *ngIf="email.errors?.['required']" class="text-danger">L'adresse e-mail est obligatoire</small>
+      <small *ngIf="email.errors?.['pattern']" class="text-danger">Veuillez entrer une adresse e-mail valide</small>
+    </div> 
+ 
+</div>
+</form>
+</div>
+
+<div class="modal-footer"> 
+<button type="button" class="btn btn-warning"  data-bs-dismiss="modal">Fermer</button>
+<button *ngIf="btnUpdateShow" [disabled]="formValue.invalid" type="button" class="btn btn-success" (click)="UpdateStagiaire()" >Enregistrer</button>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+    <h1 class="titrepage"><i class="fa-solid fa-address-card"></i> Mon profil</h1>
+    <div class="main-body"> 
+          <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img [src]="imgstr" style="border-radius:25px;" width="150">
+                    <div class="mt-3">
+                      <h4>{{currentStagiaire.nom}} {{currentStagiaire.prenom}}</h4>
+                      <p class="text-secondary mb-1">Stagiaire</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Nom</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.nom}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Prenom</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.prenom}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Username</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.username}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">E-mail</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.email}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Date de naissance</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.dateNaiss |date:"dd-MM-YYYY"}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Téléphone</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.tel}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">CIN</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.cin}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Adrsse</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{currentStagiaire.adresse}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Genre</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="radio" checked>{{currentStagiaire.genre |uppercase}}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row"> 
+                    <div class="col-sm-12">
+                        <input class="modif" type="button" value="Modifier" (click)="EditStagiaire(currentStagiaire)" data-bs-toggle="modal" data-bs-target="#exampleModal"/> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+        
+    </div>
+
+
+
+

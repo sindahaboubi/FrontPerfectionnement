@@ -1,0 +1,63 @@
+<div class="bgded overlay" style="background-image:url('assets/photo1.jpeg');"> 
+  
+  <div id="pageintro" class="hoc clear"> 
+    <article>
+      <h3 class="heading">Vous êtes étudiants et vous cherchez un stage à la vie professionnelle ?</h3>
+      <p>Merci de vous inscrire et demander un stage de votre choix</p>
+      <footer> 
+        <ul class="nospace inline pushright">
+          <li><button id="btnInsc" class="btn" (click)="onOpenModal('inscrire')" *ngIf="!connecte" ><i class="fa-solid fa-pen-to-square"></i>  S'inscrire</button></li>
+          <li><button class="btn inverse" (click)="openDialog()" *ngIf="!connecte" ><i class="fa-solid fa-arrow-right-to-bracket"></i>  Se connecter</button></li>
+        </ul>
+      </footer>
+    </article>
+  </div>
+</div>
+
+<div class="bgded overlay" style="background-image:url('assets/logo.png');">
+  <section id="splitfifty" class="hoc container clear">
+    <div class="sectiontitle">
+
+    </div>
+    <div class="bgded clear" style="background-image:url('assets/propos.jpg');"> 
+      <article>
+        <h6 class="heading font-x2">Notre mission est de vous faciliter la recherche
+          des stages et la découverte de la vie professionnelle.</h6>
+        <p> Premier arrivé, premier servi ! Voilà comment nous pensons. 
+          Mettez donc toutes les chances de votre côté en nous envoyant vos demandes de stage 
+          le plus tôt possible.</p>
+        <footer><a class="btnprop" routerLink="/propos">Lire plus à propos de nous</a></footer>
+      </article>
+    </div>
+  </section>
+</div>
+
+<div class="container" id="main-container">
+    <!-- inscrire Modal -->
+    <div class="modal fade" id="inscrireModal" tabindex="-1" role="dialog" aria-labelledby="inscrireModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <app-inscription></app-inscription>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- connecte Modal -->
+    <div class="modal fade" id="connecteModal" tabindex="-1" role="dialog" aria-labelledby="connecteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content connecte">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="connecteModalLabel">Se connecter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-authentification></app-authentification>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
